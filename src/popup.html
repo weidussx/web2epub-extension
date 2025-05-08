@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Web to EPUB</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Web to EPUB</h1>
+    
+    <div id="progress" class="progress" style="display: none;">
+      正在处理...
+    </div>
+    
+    <div id="error" class="error" style="display: none;">
+    </div>
+    
+    <div id="preview" class="preview">
+    </div>
+    
+    <div class="actions">
+      <button id="save" class="button">保存为EPUB</button>
+    </div>
+  </div>
+  
+  <script src="jszip.min.js"></script>
+  <script type="module" src="js/popup.js"></script>
+</body>
+</html> 
