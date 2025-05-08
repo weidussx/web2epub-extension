@@ -50,37 +50,44 @@ class EpubGenerator {
   }
 
   createChapter(oebps, title, content) {
-    oebps.file("chapter1.xhtml", `
-      <?xml version="1.0" encoding="UTF-8"?>
-      <html xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-          <title>${this.escapeXml(title)}</title>
-          <style>
-            body { font-family: ${CONFIG.epub.defaultFont}; }
-            img { max-width: 100%; height: auto; }
-          </style>
-        </head>
-        <body>${content}</body>
-      </html>
-    `.trim());
-  }
+    // 确保章节内容包含正确的 HTML 结构
+    const chapterContent = `
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+    <meta charset="UTF-8" />
+    <title>${title}</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+    <h1>${title}</h1>
+    ${content}
+</body>
+</html>
+`;
+    oebps.file("chapter.xhtml", chapterContent);
+}
 
   createNavigation(oebps, title) {
-    oebps.file("nav.xhtml", `
-      <?xml version="1.0" encoding="UTF-8"?>
-      <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
-        <head><title>目录</title></head>
-        <body>
-          <nav epub:type="toc" id="toc">
-            <h1>目录</h1>
-            <ol>
-              <li><a href="chapter1.xhtml">${this.escapeXml(title)}</a></li>
-            </ol>
-          </nav>
-        </body>
-      </html>
-    `.trim());
-  }
+    const navContent = `
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+    <meta charset="UTF-8" />
+    <title>${title} - Navigation</title>
+</head>
+<body>
+    <nav epub:type="toc" id="toc">
+        <h1>Table of Contents</h1>
+        <ol>
+            <li><a href="chapter.xhtml">${title}</a></li>
+        </ol>
+    </nav>
+</body>
+</html>
+`;
+    oebps.file("nav.xhtml", navContent);
+}
 
   createContentOpf(oebps, title, images) {
     const manifest = [
@@ -126,4 +133,4 @@ class EpubGenerator {
   }
 }
 
-export default EpubGenerator; 
+export default EpubGenerator;
