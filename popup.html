@@ -2,67 +2,17 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>网页转 EPUB</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    html, body {
-      width: 400px;
-      height: 600px;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 18px;
-      flex: 1;
-    }
-
-    #save {
-      padding: 8px 12px;
-      border: none;
-      background-color: #007bff;
-      color: white;
-      font-size: 14px;
-      cursor: pointer;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
-
-    #save:hover {
-      background-color: #0056b3;
-    }
-
-    #preview {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      border-top: 1px solid #ccc;
-    }
-  </style>
+  <title>Web to EPUB</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="header">
-    <h1>📖 文章预览</h1>
-    <button id="save">📥 保存为 EPUB</button>
+  <div id="app">
+    <div class="header">
+      <h1>📖 文章预览</h1>
+      <button id="save" style="display: none;">📥 保存为 EPUB</button>
+    </div>
+    <div id="preview"></div>
   </div>
-
-  <div id="preview">加载中...</div>
-
-  <script src="readability.js"></script>
-  <script src="epubgen.js"></script>
   <script src="jszip.min.js"></script>
   <script src="popup.js"></script>
 </body>
